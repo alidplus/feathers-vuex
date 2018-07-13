@@ -47,6 +47,9 @@ export const initAuth = function initAuth (options) {
   }
 
   const accessToken = readCookie(req.headers.cookie, cookieName)
+  if (!accessToken) {
+    return Promise.reject(new Error('cookie was not found'));
+  }
   const payload = getValidPayloadFromToken(accessToken)
 
   if (payload) {
